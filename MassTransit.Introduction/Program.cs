@@ -8,13 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// MassTransit configuration
 builder.Services.AddMassTransit(busConfigurator =>
 {
     busConfigurator.SetKebabCaseEndpointNameFormatter();
-    busConfigurator.AddConsumers(typeof(Program).Assembly);
+    busConfigurator.AddConsumers(typeof(Program).Assembly); // add all Consumers by reflection Aassembly
     busConfigurator.UsingInMemory((context, config) => config.ConfigureEndpoints(context));
 });
 
+// MessagePublisher as BackgroundService of MassTransit
 builder.Services.AddHostedService<MessagePublisher>();
 
 var app = builder.Build();
