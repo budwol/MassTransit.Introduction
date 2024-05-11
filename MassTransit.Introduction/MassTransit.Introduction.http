@@ -1,6 +1,0 @@
-@MassTransit.Introduction_HostAddress = http://localhost:5160
-
-GET {{MassTransit.Introduction_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
